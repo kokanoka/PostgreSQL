@@ -1,7 +1,20 @@
-version: '3.7'
+version: '3.1'
+
 services:
-  node-app:
-    build: .
-    image: openjdk:8-slim
+
+  db:
+    image: postgres:12-alpine
+    restart: always
     ports:
-      - '9999:9999'
+      - '5433:5432'
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: app
+
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - '8080:8080'
